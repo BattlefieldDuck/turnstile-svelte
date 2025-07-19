@@ -1,5 +1,5 @@
 {
-	"name": "turnstile-svelte",
+	"name": "@battlefieldduck/turnstile-svelte",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -29,7 +29,12 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
+			"svelte": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./server": {
+			"types": "./dist/server.d.ts",
+			"default": "./dist/server.js"
 		}
 	},
 	"peerDependencies": {

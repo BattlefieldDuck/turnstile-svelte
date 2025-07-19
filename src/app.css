@@ -1,0 +1,410 @@
+/* ==========================================================================
+    Root Variables
+   ========================================================================== */
+:root {
+    --bg-page: #f5f6f8;
+    --bg-panel: #ffffff;
+    --bg-input: #f9fafb;
+    --bg-border: #e3e5e8;
+    --bg-scrollbar: #d0d3d6;
+    --text-primary: #1c1e21;
+    --text-secondary: #6c6f7c;
+    --text-placeholder: #9ca3af;
+    --accent: #ec4899;
+    --accent-gradient: linear-gradient(90deg, #ec4899, #8b5cf6);
+    --radius: 8px;
+    --uppsync-color: #57F287;
+    --cloudflare-color: #F38020;
+}
+
+/* ==========================================================================
+    Base Styles
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ==========================================================================
+    Layout
+   ========================================================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: hidden;
+}
+
+.left,
+.right {
+    background: var(--bg-panel);
+    border: 1px solid var(--bg-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.left {
+    flex: 5;
+    overflow-y: auto;
+}
+
+.right {
+    flex: 3;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+    Topbar
+   ========================================================================== */
+.topbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-page);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.topbar-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 6px;
+    background: #f0f0ff;
+    border: 1px solid #dadce0;
+    color: #5b21b6;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: filter 0.2s ease;
+}
+
+.topbar-button:hover {
+    filter: brightness(1.1);
+}
+
+/* ==========================================================================
+    Panel Accent Bar
+   ========================================================================== */
+.panel-top-gradient {
+    position: relative;
+}
+
+.panel-top-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: var(--accent-gradient);
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+/* ==========================================================================
+    Typography
+   ========================================================================== */
+h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+h3 {
+    margin: 2rem 0 0.5rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+    Form Elements
+   ========================================================================== */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--bg-input);
+    border: 1px solid var(--bg-border);
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-placeholder);
+}
+
+button {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: white;
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    filter: brightness(1.05);
+}
+
+/* ==========================================================================
+    Fieldsets & Legends
+   ========================================================================== */
+fieldset {
+    border: none;
+    margin-bottom: 2rem;
+    padding: 0;
+    border-radius: var(--radius);
+}
+
+legend {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+fieldset > label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+    Radio Groups
+   ========================================================================== */
+.radio-pair {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.radio-pair label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.2;
+}
+
+fieldset input[type="radio"],
+.radio-pair input[type="radio"] {
+    accent-color: var(--accent);
+    transform: scale(1.1) translateY(-1.5px);
+    transition: all 0.2s ease;
+}
+
+.radio-group,
+.radio-column {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.radio-column {
+    flex-direction: column;
+}
+
+.radio-table {
+    margin: 0;
+    transform: scale(1.1);
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* ==========================================================================
+    Tables
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--bg-border);
+    font-size: 0.95rem;
+    vertical-align: middle;
+    text-align: left;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+tbody > tr:hover {
+    background-color: rgba(236, 72, 153, 0.05);
+    cursor: pointer;
+}
+
+tbody > tr.selected {
+    background-color: rgba(236, 72, 153, 0.1);
+}
+
+/* ==========================================================================
+    Footer
+   ========================================================================== */
+.footer {
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    background: var(--bg-page);
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer a.uppsync {
+    color: var(--uppsync-color);
+}
+
+.footer a.cloudflare {
+    color: var(--cloudflare-color);
+}
+
+.footer-sub {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+    VSCode-style Dark Code Blocks
+   ========================================================================== */
+pre,
+code {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border: 1px solid #333;
+    font-family: 'Fira Code', monospace;
+    border-radius: 6px;
+}
+
+pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-height: 300px;
+    overflow: auto;
+}
+
+code {
+    padding: 2px 6px;
+    font-size: 0.85rem;
+}
+
+.panel-desc {
+    margin: 0 0 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.panel-desc a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.panel-desc a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+    Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    fieldset {
+        margin-bottom: 1.25rem;
+    }
+
+    .radio-pair {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    th,
+    td {
+        padding: 0.5rem 0.75rem;
+    }
+
+    pre {
+        padding: 0.75rem;
+    }
+
+    .topbar {
+        display: none;
+    }
+
+    .footer {
+        padding: 1rem 1rem 2rem;
+        font-size: 0.75rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table thead,
+    table tbody,
+    table tr,
+    table td,
+    table th {
+        white-space: nowrap;
+    }
+}
