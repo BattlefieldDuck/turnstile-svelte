@@ -85,3 +85,11 @@
 		<Component />
 	{/if}
 </div>
+
+<style>
+	code {
+		color: #d4d4d4;
+		border: 1px solid #333;
+		border-radius: 6px;
+	}
+</style>

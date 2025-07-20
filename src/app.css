@@ -53,12 +53,12 @@ body {
 }
 
 .left {
-    flex: 5;
+    flex: 2;
     overflow-y: auto;
 }
 
 .right {
-    flex: 3;
+    flex: 1.5;
     overflow-y: auto;
 }
 
