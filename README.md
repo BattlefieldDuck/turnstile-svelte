@@ -1,58 +1,50 @@
-# Svelte library
+# turnstile-svelte
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+<img align="right" width="100" height="100" src="https://github.com/BattlefieldDuck/turnstile-svelte/blob/main/static/favicon-96x96.png?raw=true">
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+[![Node.js Build](https://github.com/BattlefieldDuck/turnstile-svelte/actions/workflows/node.js.yml/badge.svg)](https://github.com/BattlefieldDuck/turnstile-svelte/actions/workflows/node.js.yml)
+![NPM Type Definitions](https://img.shields.io/npm/types/%40battlefieldduck%2Fturnstile-svelte)
+[![NPM Version](https://img.shields.io/npm/v/%40battlefieldduck%2Fturnstile-svelte)](https://www.npmjs.com/package/@battlefieldduck/turnstile-svelte)
+![NPM Downloads](https://img.shields.io/npm/dw/%40battlefieldduck%2Fturnstile-svelte)
+![NPM Downloads](https://img.shields.io/npm/d18m/%40battlefieldduck%2Fturnstile-svelte)
+![NPM License](https://img.shields.io/npm/l/%40battlefieldduck%2Fturnstile-svelte)
 
-## Creating a project
+A lightweight and declarative [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) integration for Svelte and SvelteKit.
 
-If you're seeing this, you've probably already done this step. Congrats!
+**Live playground**: [battlefieldduck.github.io/turnstile-svelte](https://battlefieldduck.github.io/turnstile-svelte)
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Installation
 
 ```bash
-npm run dev
+npm install @battlefieldduck/turnstile-svelte
+````
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+## Example
+
+```svelte
+<script lang="ts">
+    import { turnstile } from '@battlefieldduck/turnstile-svelte';
+
+    function callback(token: string) {
+        console.log('Challenge Success:', token);
+    }
+</script>
+
+<div {@attach turnstile({ sitekey: '1x00000000000000000000AA', callback })}></div>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Docs
 
-## Building
+* [Live Examples & Playground](https://battlefieldduck.github.io/turnstile-svelte)
+* [Cloudflare Turnstile Docs](https://developers.cloudflare.com/turnstile/)
 
-To build your library:
+## Contributing
+Contributions are welcome! Please feel free to submit pull requests or open issues.
 
-```bash
-npm run package
-```
+![https://github.com/BattlefieldDuck/turnstile-svelte/graphs/contributors](https://contrib.rocks/image?repo=BattlefieldDuck/turnstile-svelte)
 
-To create a production version of your showcase app:
+## License
+turnstile-svelte is licensed under the MIT License. See the `LICENSE` file for more details.
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/BattlefieldDuck/turnstile-svelte.svg?variant=adaptive)](https://starchart.cc/BattlefieldDuck/turnstile-svelte)
