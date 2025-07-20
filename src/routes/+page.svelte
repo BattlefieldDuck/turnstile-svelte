@@ -63,171 +63,147 @@
 	const output = $derived(highlight(JSON.stringify({ token: _token }, null, 4)));
 </script>
 
-<div class="topbar">
-	<div class="topbar-actions">
-		<a
-			href="https://developers.cloudflare.com/turnstile/"
-			target="_blank"
-			rel="noopener"
-			class="topbar-button"
-		>
-			Cloudflare Turnstile docs ↗
-		</a>
-		<a
-			href="https://github.com/uppsync/cloudflare-turnstile-svelte"
-			target="_blank"
-			rel="noopener"
-			class="topbar-button"
-		>
-			GitHub ↗
-		</a>
-	</div>
-</div>
+<div class="left panel-top-gradient">
+	<h2>Turnstile Svelte Playground</h2>
 
-<div class="container">
-	<div class="left panel-top-gradient">
-		<h2>Turnstile Svelte Playground</h2>
+	<p class="panel-desc">
+		Explore Cloudflare Turnstile by changing render mode, sitekey, theme and size to see live
+		behavior and emitted tokens. Watch how each option affects the widget and the token it emits.
+	</p>
 
-		<p class="panel-desc">
-			Explore Cloudflare Turnstile by changing render mode, sitekey, theme and size to see live
-			behavior and emitted tokens. Watch how each option affects the widget and the token it emits.
-		</p>
+	<fieldset>
+		<legend>Select Render Mode</legend>
+		<div class="radio-pair">
+			<label><input type="radio" bind:group={render} value="explicit" /> Explicit</label>
+			<label><input type="radio" bind:group={render} value="implicit" /> Implicit</label>
+		</div>
+	</fieldset>
 
-		<fieldset>
-			<legend>Select Render Mode</legend>
-			<div class="radio-pair">
-				<label><input type="radio" bind:group={render} value="explicit" /> Explicit</label>
-				<label><input type="radio" bind:group={render} value="implicit" /> Implicit</label>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>Select Dummy Sitekey</legend>
-			<table>
-				<thead>
-					<tr>
-						<th></th>
-						<th>Sitekey</th>
-						<th>Description</th>
-						<th>Visibility</th>
+	<fieldset>
+		<legend>Select Dummy Sitekey</legend>
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Sitekey</th>
+					<th>Description</th>
+					<th>Visibility</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each options as option}
+					<tr
+						onclick={() => (params.sitekey = option.key)}
+						class:selected={params.sitekey === option.key}
+						style="cursor: pointer;"
+					>
+						<td>
+							<input
+								type="radio"
+								bind:group={params.sitekey}
+								value={option.key}
+								name="sitekey"
+								class="radio-table"
+							/>
+						</td>
+						<td><code>{option.key}</code></td>
+						<td>{option.description}</td>
+						<td>{option.visibility}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{#each options as option}
-						<tr
-							onclick={() => (params.sitekey = option.key)}
-							class:selected={params.sitekey === option.key}
-							style="cursor: pointer;"
-						>
-							<td>
-								<input
-									type="radio"
-									bind:group={params.sitekey}
-									value={option.key}
-									name="sitekey"
-									class="radio-table"
-								/>
-							</td>
-							<td><code>{option.key}</code></td>
-							<td>{option.description}</td>
-							<td>{option.visibility}</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</fieldset>
+				{/each}
+			</tbody>
+		</table>
+	</fieldset>
 
-		<fieldset>
-			<legend>Select Theme</legend>
-			<div class="radio-pair">
-				<label>
-					<input type="radio" bind:group={params.theme} value="light" />
-					Light
-				</label>
-				<label><input type="radio" bind:group={params.theme} value="dark" />Dark</label>
-				<label>
-					<input type="radio" bind:group={params.theme} value="auto" />
-					Auto
-				</label>
-			</div>
-		</fieldset>
+	<fieldset>
+		<legend>Select Theme</legend>
+		<div class="radio-pair">
+			<label>
+				<input type="radio" bind:group={params.theme} value="light" />
+				Light
+			</label>
+			<label><input type="radio" bind:group={params.theme} value="dark" />Dark</label>
+			<label>
+				<input type="radio" bind:group={params.theme} value="auto" />
+				Auto
+			</label>
+		</div>
+	</fieldset>
 
-		<fieldset>
-			<legend>Select Widget Size</legend>
-			<div class="radio-pair">
-				<label>
-					<input type="radio" bind:group={params.size} value="normal" />
-					<span>Normal</span>
-				</label>
-				<label>
-					<input type="radio" bind:group={params.size} value="flexible" />
-					<span>Flexible</span>
-				</label>
-				<label>
-					<input type="radio" bind:group={params.size} value="compact" />
-					<span>Compact</span>
-				</label>
-			</div>
-		</fieldset>
-	</div>
-
-	<div class="right panel-top-gradient">
-		{#key [params.sitekey, params.theme, params.size]}
-			<h2>Turnstile Widget</h2>
-			<pre>{@html command}</pre>
-			<h3>Render</h3>
-			{#if render === 'explicit'}
-				<p>Explicitly render the Turnstile widget</p>
-				<div
-					{@attach turnstile({
-						sitekey: params.sitekey,
-						theme: params.theme,
-						size: params.size,
-						callback
-					})}
-				></div>
-			{:else}
-				<p>Implicitly render the Turnstile widget</p>
-				<div
-					{@attach turnstile()}
-					data-sitekey={params.sitekey}
-					data-theme={params.theme}
-					data-size={params.size}
-					data-callback="callback"
-				></div>
-			{/if}
-		{/key}
-		<h3>Params</h3>
-		<pre>{@html input}</pre>
-		<h3>Output</h3>
-		<pre>{@html output}</pre>
-	</div>
+	<fieldset>
+		<legend>Select Widget Size</legend>
+		<div class="radio-pair">
+			<label>
+				<input type="radio" bind:group={params.size} value="normal" />
+				<span>Normal</span>
+			</label>
+			<label>
+				<input type="radio" bind:group={params.size} value="flexible" />
+				<span>Flexible</span>
+			</label>
+			<label>
+				<input type="radio" bind:group={params.size} value="compact" />
+				<span>Compact</span>
+			</label>
+		</div>
+	</fieldset>
 </div>
 
-<footer class="footer">
-	<p>
-		This library is maintained by the
-		<a href="https://github.com/BattlefieldDuck" target="_blank" rel="noopener">
-			@BattlefieldDuck
-		</a>. Not affiliated with or endorsed by Cloudflare. Cloudflare Turnstile is a product by
-		<a href="https://www.cloudflare.com" class="cloudflare" target="_blank" rel="noopener">
-			Cloudflare
-		</a>.
-	</p>
-	<p class="footer-sub">
-		turnstile-svelte is an open-source npm package for easily integrating
-		<a
-			href="https://developers.cloudflare.com/turnstile/"
-			class="cloudflare"
-			target="_blank"
-			rel="noopener"
-		>
-			Cloudflare Turnstile
-		</a>
-		with Svelte and SvelteKit. It simplifies client-side rendering of Turnstile widgets via a declarative,
-		flexible API.
-		<a href="https://github.com/uppsync/cloudflare-turnstile-svelte" target="_blank">
-			View on GitHub
-		</a>.
-	</p>
-</footer>
+<div class="right panel-top-gradient">
+	{#key [params.sitekey, params.theme, params.size]}
+		<h2>Turnstile Widget</h2>
+		<pre>{@html command}</pre>
+		<h3>Render</h3>
+		{#if render === 'explicit'}
+			<p>Explicitly render the Turnstile widget</p>
+			<div
+				{@attach turnstile({
+					sitekey: params.sitekey,
+					theme: params.theme,
+					size: params.size,
+					callback
+				})}
+			></div>
+		{:else}
+			<p>Implicitly render the Turnstile widget</p>
+			<div
+				{@attach turnstile()}
+				data-sitekey={params.sitekey}
+				data-theme={params.theme}
+				data-size={params.size}
+				data-callback="callback"
+			></div>
+		{/if}
+	{/key}
+	<h3>Params</h3>
+	<pre>{@html input}</pre>
+	<h3>Output</h3>
+	<pre>{@html output}</pre>
+</div>
+
+<style>
+	/* ==========================================================================
+      VSCode-style Dark Code Blocks
+    ========================================================================== */
+	pre,
+	code {
+		background-color: #1e1e1e;
+		color: #d4d4d4;
+		border: 1px solid #333;
+		font-family: 'Fira Code', monospace;
+		border-radius: 6px;
+	}
+
+	pre {
+		padding: 1rem;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		max-height: 300px;
+		overflow: auto;
+	}
+
+	code {
+		padding: 2px 6px;
+		font-size: 0.85rem;
+	}
+</style>

@@ -305,31 +305,6 @@ tbody > tr.selected {
     margin-top: 0.25rem;
 }
 
-/* ==========================================================================
-    VSCode-style Dark Code Blocks
-   ========================================================================== */
-pre,
-code {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
-    border: 1px solid #333;
-    font-family: 'Fira Code', monospace;
-    border-radius: 6px;
-}
-
-pre {
-    padding: 1rem;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    max-height: 300px;
-    overflow: auto;
-}
-
-code {
-    padding: 2px 6px;
-    font-size: 0.85rem;
-}
-
 .panel-desc {
     margin: 0 0 1.25rem;
     font-size: 0.85rem;
@@ -407,4 +382,68 @@ code {
     table th {
         white-space: nowrap;
     }
+}
+
+.topbar {
+	max-width: 1200px;
+	margin: 0 auto;
+	background: var(--bg-page);
+	padding: 0.75rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+
+.main-nav {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.main-nav .brand {
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-decoration: none;
+	color: var(--text-primary);
+	padding: 0.45rem 0.65rem;
+	border-radius: 6px;
+}
+
+.main-nav a {
+	text-decoration: none;
+	font-size: 0.8rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+	padding: 0.45rem 0.65rem;
+	border-radius: 6px;
+	transition: background 0.15s, color 0.15s;
+	position: relative;
+}
+
+.main-nav a:hover {
+	background: #eceef3;
+	color: var(--text-primary);
+}
+
+.main-nav a.selected {
+	background: var(--accent-gradient);
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.main-nav a.selected::after {
+	content: '';
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	bottom: 4px;
+	height: 2px;
+	background: var(--accent-gradient);
+	border-radius: 2px;
+}
+
+.topbar-actions {
+	display: flex;
+	gap: 0.5rem;
 }

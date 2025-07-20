@@ -9,11 +9,15 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
 	<link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
 	%sveltekit.head%
 </head>
 
 <body data-sveltekit-preload-data="hover">
 	<div>%sveltekit.body%</div>
+	<script src="https://unpkg.com/highlightjs"></script>
+	<script src="https://unpkg.com/highlightjs-svelte/dist/svelte.min.js"></script>
 </body>
 
 </html>

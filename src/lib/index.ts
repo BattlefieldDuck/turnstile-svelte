@@ -1,2 +1,4 @@
 // Reexport your entry components here
-export { turnstile } from './client.js';
+import Turnstile from './client.svelte';
+import { turnstile } from './client.js';
+export { turnstile, Turnstile };
