@@ -1,6 +1,16 @@
 {
 	"name": "@battlefieldduck/turnstile-svelte",
 	"version": "0.0.1",
+	"description": "Simple and declarative Cloudflare Turnstile integration for Svelte & SvelteKit.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BattlefieldDuck/turnstile-svelte.git"
+	},
+	"bugs": {
+		"url": "https://github.com/BattlefieldDuck/turnstile-svelte/issues"
+	},
+	"homepage": "https://battlefieldduck.github.io/turnstile-svelte",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -68,6 +78,10 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"keywords": [
-		"svelte"
+		"svelte",
+		"sveltekit",
+		"turnstile",
+		"cloudflare",
+		"captcha"
 	]
 }
