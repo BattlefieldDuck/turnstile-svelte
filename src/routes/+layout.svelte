@@ -35,7 +35,7 @@
 			Cloudflare Turnstile docs ↗
 		</a>
 		<a
-			href="https://github.com/uppsync/cloudflare-turnstile-svelte"
+			href="https://github.com/BattlefieldDuck/turnstile-svelte"
 			target="_blank"
 			rel="noopener"
 			class="topbar-button"
@@ -71,7 +71,7 @@
 		</a>
 		with Svelte and SvelteKit. It simplifies client-side rendering of Turnstile widgets via a declarative,
 		flexible API.
-		<a href="https://github.com/uppsync/cloudflare-turnstile-svelte" target="_blank">
+		<a href="https://github.com/BattlefieldDuck/turnstile-svelte" target="_blank">
 			View on GitHub
 		</a>.
 	</p>
