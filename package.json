@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/BattlefieldDuck/turnstile-svelte.git"
+		"url": "git+https://github.com/BattlefieldDuck/turnstile-svelte.git"
 	},
 	"bugs": {
 		"url": "https://github.com/BattlefieldDuck/turnstile-svelte/issues"
@@ -38,9 +38,9 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
+			"types": "./dist/client.d.ts",
 			"svelte": "./dist/index.js",
-			"default": "./dist/index.js"
+			"default": "./dist/client.js"
 		},
 		"./server": {
 			"types": "./dist/server.d.ts",
