@@ -1,4 +1,4 @@
-import type { TurnstileVerificationRequest, TurnstileVerificationResponse } from "./server.d.js";
+import type { TurnstileVerificationRequest, TurnstileVerificationResponse } from "./types.js";
 
 export async function siteverify(data: TurnstileVerificationRequest): Promise<TurnstileVerificationResponse> {
     // Validate the token by calling the

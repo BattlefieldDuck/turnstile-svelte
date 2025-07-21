@@ -1,6 +1,6 @@
 {
 	"name": "@battlefieldduck/turnstile-svelte",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Simple and declarative Cloudflare Turnstile integration for Svelte & SvelteKit.",
 	"license": "MIT",
 	"repository": {
@@ -38,13 +38,13 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"types": "./dist/client.d.ts",
+			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js",
-			"default": "./dist/client.js"
+			"default": "./dist/index.js"
 		},
 		"./server": {
-			"types": "./dist/server.d.ts",
-			"default": "./dist/server.js"
+			"types": "./dist/server/index.d.ts",
+			"default": "./dist/server/index.js"
 		}
 	},
 	"peerDependencies": {

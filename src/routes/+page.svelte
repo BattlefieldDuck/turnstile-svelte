@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { turnstile } from '$lib/client.js';
-	import type { RenderParameters } from '$lib/client.d.js';
+	import { turnstile } from '$lib/index.js';
+	import type { RenderParameters } from '$lib/index.js';
 	import { onMount, untrack } from 'svelte';
 
 	// render

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { RenderParameters } from './client.d.js';
-	import { turnstile } from './client.js';
+	import type { RenderParameters } from './types.js';
+	import { turnstile } from './index.js';
 
 	const params: RenderParameters = $props();
 </script>

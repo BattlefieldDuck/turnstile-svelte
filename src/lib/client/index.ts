@@ -1,5 +1,5 @@
 import type { Attachment } from 'svelte/attachments';
-import type { RenderParameters } from './client.d.js';
+import type { RenderParameters } from './types.js';
 
 export function turnstile(params?: RenderParameters): Attachment<HTMLDivElement> {
 	return (element: HTMLDivElement) => {
