@@ -7,14 +7,17 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
       - run: npm ci
       - run: npx playwright install --with-deps
       - run: npm test
@@ -26,12 +29,14 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org/
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
       - run: npm ci
-      - run: npm publish --provenance --access=public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      - run: npm run build --if-present
+      - run: npm publish
