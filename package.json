@@ -1,6 +1,6 @@
 {
 	"name": "@battlefieldduck/turnstile-svelte",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Simple and declarative Cloudflare Turnstile integration for Svelte & SvelteKit.",
 	"license": "MIT",
 	"repository": {
