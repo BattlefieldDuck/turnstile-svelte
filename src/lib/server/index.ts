@@ -1,6 +1,6 @@
 import type { TurnstileVerificationRequest, TurnstileVerificationResponse } from "./types.js";
 
-export async function siteverify(data: TurnstileVerificationRequest): Promise<TurnstileVerificationResponse> {
+export async function validateTurnstile(data: TurnstileVerificationRequest): Promise<TurnstileVerificationResponse> {
     // Validate the token by calling the
     // "/siteverify" API endpoint.
     const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';

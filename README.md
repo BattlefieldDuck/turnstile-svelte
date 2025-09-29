@@ -17,20 +17,64 @@ A lightweight and declarative [Cloudflare Turnstile](https://developers.cloudfla
 
 ```bash
 npm install @battlefieldduck/turnstile-svelte
-````
+```
 
 ## Example
 
+### `+page.svelte`
+
 ```svelte
 <script lang="ts">
-    import { turnstile } from '@battlefieldduck/turnstile-svelte';
-
-    function callback(token: string) {
-        console.log('Challenge Success:', token);
-    }
+    import { turnstile } from "@battlefieldduck/turnstile-svelte";
 </script>
 
-<div {@attach turnstile({ sitekey: '1x00000000000000000000AA', callback })}></div>
+<form method="POST">
+    <label>
+        Email
+        <input name="email" type="email" />
+    </label>
+    <label>
+        Password
+        <input name="password" type="password" />
+    </label>
+    <div {@attach turnstile({ sitekey: "1x00000000000000000000AA" })}></div>
+    <button>Log in</button>
+</form>
+```
+
+### `+page.server.ts`
+
+```ts
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { validateTurnstile } from "@battlefieldduck/turnstile-svelte/server";
+
+export const actions = {
+    default: async (event) => {
+        const data = await event.request.formData();
+        const email = String(data.get("email") ?? "");
+        const password = String(data.get("password") ?? "");
+        const token = String(data.get("cf-turnstile-response") ?? "");
+        const ip = event.getClientAddress();
+
+        const validation = await validateTurnstile({
+            secret: "1x0000000000000000000000000000000AA", // <- replace with your secret key
+            response: token,
+            remoteip: ip
+        });
+
+        if (!validation.success) {
+            console.warn("Turnstile failed", { errors: validation["error-codes"] });
+            return fail(400, { error: "Invalid verification" });
+        }
+
+        console.log("Valid Turnstile for", { email, ip });
+
+        // Token is valid - process the form
+
+        return { success: true };
+    }
+} satisfies Actions;
 ```
 
 ## Docs
