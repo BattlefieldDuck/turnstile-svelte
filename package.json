@@ -82,6 +82,8 @@
 		"sveltekit",
 		"turnstile",
 		"cloudflare",
-		"captcha"
+		"captcha",
+		"svelte-turnstile",
+		"turnstile-svelte"
 	]
 }
