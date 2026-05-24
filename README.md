@@ -25,7 +25,8 @@ npm install @battlefieldduck/turnstile-svelte
 
 ```svelte
 <script lang="ts">
-    import { turnstile } from "@battlefieldduck/turnstile-svelte";
+    import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
+    import { turnstile } from '@battlefieldduck/turnstile-svelte';
 </script>
 
 <form method="POST">
@@ -37,7 +38,7 @@ npm install @battlefieldduck/turnstile-svelte
         Password
         <input name="password" type="password" />
     </label>
-    <div {@attach turnstile({ sitekey: "1x00000000000000000000AA" })}></div>
+    <div {@attach turnstile({ sitekey: PUBLIC_TURNSTILE_SITE_KEY })}></div>
     <button>Log in</button>
 </form>
 ```
@@ -46,31 +47,29 @@ npm install @battlefieldduck/turnstile-svelte
 
 ```ts
 import { fail } from '@sveltejs/kit';
+import { TURNSTILE_SECRET_KEY } from '$env/static/private';
+import { validateTurnstile } from '@battlefieldduck/turnstile-svelte/server';
 import type { Actions } from './$types';
-import { validateTurnstile } from "@battlefieldduck/turnstile-svelte/server";
 
 export const actions = {
     default: async (event) => {
         const data = await event.request.formData();
-        const email = String(data.get("email") ?? "");
-        const password = String(data.get("password") ?? "");
-        const token = String(data.get("cf-turnstile-response") ?? "");
-        const ip = event.getClientAddress();
 
         const validation = await validateTurnstile({
-            secret: "1x0000000000000000000000000000000AA", // <- replace with your secret key
-            response: token,
-            remoteip: ip
+            secret: TURNSTILE_SECRET_KEY,
+            response: data.get('cf-turnstile-response'),
+            remoteip: event.getClientAddress()
         });
 
         if (!validation.success) {
-            console.warn("Turnstile failed", { errors: validation["error-codes"] });
-            return fail(400, { error: "Invalid verification" });
+            console.warn('Turnstile failed', { errors: validation['error-codes'] });
+            return fail(400, { error: 'Invalid verification' });
         }
 
-        console.log("Valid Turnstile for", { email, ip });
-
         // Token is valid - process the form
+
+        const email = data.get('email');
+        const password = data.get('password');
 
         return { success: true };
     }
