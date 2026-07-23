@@ -59,7 +59,7 @@
 		"@sveltejs/kit": "^2.60.1",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
-		"@vitest/browser": "^4.1.0",
+		"@vitest/browser": "^4.1.10",
 		"@vitest/browser-playwright": "^4.0.17",
 		"eslint": "^10.4.0",
 		"eslint-config-prettier": "^10.1.8",
