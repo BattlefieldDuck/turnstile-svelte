@@ -3,7 +3,7 @@ import type { RenderParameters } from './types.js';
 
 export function turnstile(params?: RenderParameters): Attachment<HTMLDivElement> {
 	return (element: HTMLDivElement) => {
-		let widgetId: string | undefined
+		let widgetId: string | undefined;
 
 		// Implicitly render the Turnstile widget, add cf-turnstile class name
 		if (!params) {
@@ -14,8 +14,10 @@ export function turnstile(params?: RenderParameters): Attachment<HTMLDivElement>
 		}
 
 		const onloadTurnstileCallback = () => {
-			widgetId = params ? window.turnstile?.render(element, params) : window.turnstile?.implicitRender();
-		}
+			widgetId = params
+				? window.turnstile?.render(element, params)
+				: window.turnstile?.implicitRender();
+		};
 
 		if (window.turnstile) {
 			onloadTurnstileCallback();
@@ -37,6 +39,6 @@ export function turnstile(params?: RenderParameters): Attachment<HTMLDivElement>
 				window.turnstile?.remove(widgetId);
 				widgetId = undefined;
 			}
-		}
+		};
 	};
 }

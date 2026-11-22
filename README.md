@@ -25,21 +25,21 @@ npm install @battlefieldduck/turnstile-svelte
 
 ```svelte
 <script lang="ts">
-    import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
-    import { turnstile } from '@battlefieldduck/turnstile-svelte';
+	import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
+	import { turnstile } from '@battlefieldduck/turnstile-svelte';
 </script>
 
 <form method="POST">
-    <label>
-        Email
-        <input name="email" type="email" />
-    </label>
-    <label>
-        Password
-        <input name="password" type="password" />
-    </label>
-    <div {@attach turnstile({ sitekey: PUBLIC_TURNSTILE_SITE_KEY })}></div>
-    <button>Log in</button>
+	<label>
+		Email
+		<input name="email" type="email" />
+	</label>
+	<label>
+		Password
+		<input name="password" type="password" />
+	</label>
+	<div {@attach turnstile({ sitekey: PUBLIC_TURNSTILE_SITE_KEY })}></div>
+	<button>Log in</button>
 </form>
 ```
 
@@ -52,42 +52,45 @@ import { validateTurnstile } from '@battlefieldduck/turnstile-svelte/server';
 import type { Actions } from './$types';
 
 export const actions = {
-    default: async (event) => {
-        const data = await event.request.formData();
+	default: async (event) => {
+		const data = await event.request.formData();
 
-        const validation = await validateTurnstile({
-            secret: TURNSTILE_SECRET_KEY,
-            response: data.get('cf-turnstile-response'),
-            remoteip: event.getClientAddress()
-        });
+		const validation = await validateTurnstile({
+			secret: TURNSTILE_SECRET_KEY,
+			response: data.get('cf-turnstile-response'),
+			remoteip: event.getClientAddress()
+		});
 
-        if (!validation.success) {
-            console.warn('Turnstile failed', { errors: validation['error-codes'] });
-            return fail(400, { error: 'Invalid verification' });
-        }
+		if (!validation.success) {
+			console.warn('Turnstile failed', { errors: validation['error-codes'] });
+			return fail(400, { error: 'Invalid verification' });
+		}
 
-        // Token is valid - process the form
+		// Token is valid - process the form
 
-        const email = data.get('email');
-        const password = data.get('password');
+		const email = data.get('email');
+		const password = data.get('password');
 
-        return { success: true };
-    }
+		return { success: true };
+	}
 } satisfies Actions;
 ```
 
 ## Docs
 
-* [Live Examples & Playground](https://battlefieldduck.github.io/turnstile-svelte)
-* [Cloudflare Turnstile Docs](https://developers.cloudflare.com/turnstile/)
+- [Live Examples & Playground](https://battlefieldduck.github.io/turnstile-svelte)
+- [Cloudflare Turnstile Docs](https://developers.cloudflare.com/turnstile/)
 
 ## Contributing
+
 Contributions are welcome! Please feel free to submit pull requests or open issues.
 
 ![https://github.com/BattlefieldDuck/turnstile-svelte/graphs/contributors](https://contrib.rocks/image?repo=BattlefieldDuck/turnstile-svelte)
 
 ## License
+
 turnstile-svelte is licensed under the MIT License. See the `LICENSE` file for more details.
 
 ## Stargazers over time
+
 [![Stargazers over time](https://starchart.cc/BattlefieldDuck/turnstile-svelte.svg?variant=adaptive)](https://starchart.cc/BattlefieldDuck/turnstile-svelte)

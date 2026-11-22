@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import '../app.css';
-	import { base } from '$app/paths';
+	import { base, resolve } from '$app/paths';
 	import { page } from '$app/state';
 
 	let { children }: { children: Snippet } = $props();
@@ -9,16 +9,16 @@
 
 <div class="topbar">
 	<nav class="main-nav" aria-label="Main">
-		<a href="{base}/" class="brand">turnstile-svelte</a>
+		<a href={resolve('/')} class="brand">turnstile-svelte</a>
 		<a
-			href="{base}/"
+			href={resolve('/')}
 			class:selected={page.url.pathname === `${base}/`}
 			aria-current={page.url.pathname === `${base}/` ? 'page' : undefined}
 		>
 			Playground
 		</a>
 		<a
-			href="{base}/examples"
+			href={resolve('/examples')}
 			class:selected={page.url.pathname === `${base}/examples`}
 			aria-current={page.url.pathname === `${base}/examples` ? 'page' : undefined}
 		>

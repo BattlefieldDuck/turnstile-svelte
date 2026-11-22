@@ -27,12 +27,30 @@
 
 	const highlightCode = () => {
 		document.querySelectorAll('.svelte').forEach((el) => {
-			(window as any).hljs.highlightBlock(el);
+			(
+				window as unknown as {
+					hljs: {
+						highlight: (code: string, options: { language: string }) => { value: string };
+						highlightAll: () => void;
+						highlightElement: (el: Element) => void;
+						highlightBlock: (el: Element) => void;
+					};
+					turnstile: {
+						render: (el: string | HTMLElement, opts?: Record<string, unknown>) => string;
+						reset: (id?: string) => void;
+						remove: (id?: string) => void;
+						execute: (el?: string | HTMLElement, opts?: Record<string, unknown>) => void;
+						getResponse: (id?: string) => string | undefined;
+						isExpired: (id?: string) => boolean;
+					};
+					[key: string]: unknown;
+				}
+			).hljs.highlightBlock(el);
 		});
 	};
 
 	$effect(() => {
-		code;
+		Boolean(code);
 		highlightCode();
 	});
 </script>
@@ -49,7 +67,7 @@
 	<fieldset>
 		<legend>Select Example</legend>
 		<div class="radio-pair">
-			{#each options as option}
+			{#each options as option, i (i)}
 				<label>
 					<input type="radio" bind:group={example} value={option} />{capitalize(option)}
 				</label>

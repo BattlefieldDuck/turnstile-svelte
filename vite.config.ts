@@ -4,7 +4,7 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-	plugins: [sveltekit()/*, devtoolsJson()*/],
+	plugins: [sveltekit() /*, devtoolsJson()*/],
 	test: {
 		projects: [
 			{
@@ -17,7 +17,7 @@ export default defineConfig({
 						instances: [{ browser: 'chromium' }]
 					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-					exclude: ['src/lib/server/**'],
+					exclude: ['src/lib/server/**']
 				}
 			},
 			{

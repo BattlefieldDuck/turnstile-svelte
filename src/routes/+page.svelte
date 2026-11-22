@@ -8,7 +8,19 @@
 
 	// for implicit render only
 	onMount(() => {
-		(window as any).callback = callback;
+		(
+			window as unknown as {
+				turnstile: {
+					render: (el: string | HTMLElement, opts?: Record<string, unknown>) => string;
+					reset: (id?: string) => void;
+					remove: (id?: string) => void;
+					execute: (el?: string | HTMLElement, opts?: Record<string, unknown>) => void;
+					getResponse: (id?: string) => string | undefined;
+					isExpired: (id?: string) => boolean;
+				};
+				[key: string]: unknown;
+			}
+		).callback = callback;
 	});
 
 	// sitekey
@@ -40,10 +52,10 @@
 	});
 
 	$effect(() => {
-		render;
-		params.sitekey;
-		params.theme;
-		params.size;
+		Boolean(render);
+		Boolean(params.sitekey);
+		Boolean(params.theme);
+		Boolean(params.size);
 		untrack(() => {
 			_token = '';
 		});
@@ -91,7 +103,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each options as option}
+				{#each options as option, i (i)}
 					<tr
 						onclick={() => (params.sitekey = option.key)}
 						class:selected={params.sitekey === option.key}
@@ -152,7 +164,9 @@
 <div class="right panel-top-gradient">
 	{#key [params.sitekey, params.theme, params.size]}
 		<h2>Turnstile Widget</h2>
+		<!-- eslint-disable svelte/no-at-html-tags -->
 		<pre>{@html command}</pre>
+		<!-- eslint-enable svelte/no-at-html-tags -->
 		<h3>Render</h3>
 		{#if render === 'explicit'}
 			<p>Explicitly render the Turnstile widget</p>
@@ -176,9 +190,13 @@
 		{/if}
 	{/key}
 	<h3>Params</h3>
+	<!-- eslint-disable svelte/no-at-html-tags -->
 	<pre>{@html input}</pre>
+	<!-- eslint-enable svelte/no-at-html-tags -->
 	<h3>Output</h3>
+	<!-- eslint-disable svelte/no-at-html-tags -->
 	<pre>{@html output}</pre>
+	<!-- eslint-enable svelte/no-at-html-tags -->
 </div>
 
 <style>

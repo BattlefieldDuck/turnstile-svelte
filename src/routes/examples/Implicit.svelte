@@ -3,7 +3,19 @@
 	import { turnstile } from '$lib/index.js';
 
 	onMount(() => {
-		(window as any).callback = callback;
+		(
+			window as unknown as {
+				turnstile: {
+					render: (el: string | HTMLElement, opts?: Record<string, unknown>) => string;
+					reset: (id?: string) => void;
+					remove: (id?: string) => void;
+					execute: (el?: string | HTMLElement, opts?: Record<string, unknown>) => void;
+					getResponse: (id?: string) => string | undefined;
+					isExpired: (id?: string) => boolean;
+				};
+				[key: string]: unknown;
+			}
+		).callback = callback;
 	});
 
 	function callback(token: string) {
